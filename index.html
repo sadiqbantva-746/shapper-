@@ -389,6 +389,16 @@ src="https://www.facebook.com/tr?id=1437404378348586&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
 
+<!-- TikTok Pixel Code Start -->
+<script>
+!function (w, d, t) {
+  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script");n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+  ttq.load('DBBOJ5JC77U4SEFNDS70');
+  ttq.page();
+}(window, document, 'ttq');
+</script>
+<!-- TikTok Pixel Code End -->
+
 </head><body>
 <div class="top reviewTicker"><div class="tickerTrack"><span>★★★★★ Mehwish, Karachi — Waist shaper ki fitting bohat achi hai!</span><span>★★★★★ Alina, Lahore — Comfortable hai, daily wear ke liye perfect.</span><span>★★★★★ Saba, Islamabad — Shape smooth aur neat look deti hai.</span><span>★★★★★ Nimra, Rawalpindi — Fabric soft hai aur quality achi hai.</span><span>🚚 CASH ON DELIVERY &nbsp; • &nbsp; EASY ORDER PROCESS &nbsp; • &nbsp; DELIVERY ALL OVER PAKISTAN</span></div></div>
 <div class="orderToast" id="orderToast" role="status" aria-live="polite"><button class="toastClose" type="button" aria-label="Close notification" onclick="document.getElementById('orderToast').style.display='none'">×</button><div class="toastThumb">🛍️</div><div class="toastCopy"><strong>Recent order</strong><span>Waist Shaper · Pack of 3</span><small id="toastTime"></small></div></div>
@@ -814,8 +824,21 @@ window.GOOGLE_SHEET_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwvB9
           thank.classList.add('show');
           thank.setAttribute('aria-hidden','false');
 
-          // Fire Meta Purchase only after the customer reaches the Thank You page.
+          // Fire Meta and TikTok purchase events only after the customer reaches Thank You.
           trackPurchase();
+          if(!window.__waistShaperTikTokPurchaseTracked && window.ttq && typeof window.ttq.track === 'function'){
+            const purchaseQty=Math.max(1,parseInt(val('qty')||'1',10));
+            const purchaseValue=(1499*purchaseQty)+200;
+            window.__waistShaperTikTokPurchaseTracked=true;
+            window.ttq.track('CompletePayment',{
+              value:purchaseValue,
+              currency:'PKR',
+              content_type:'product',
+              content_id:'WAIST-SHAPER',
+              content_name:"Women's Adjustable Waist Shaper Belt",
+              quantity:purchaseQty
+            });
+          }
         }
       },1000);
     }, true);
